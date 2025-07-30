@@ -9,6 +9,17 @@ function App() {
   const ws = useRef(null);
   const messagesEndRef = useRef(null);
 
+  const fetchMessages = async () => {
+    const res = await fetch('http://localhost:8000/messages');
+    const data = await res.json();
+    setChatLog(data);
+  };
+
+
+  useEffect(() => {
+    fetchMessages();
+  }, []); 
+
   useEffect(() => {
     if (!nickname) return;
 
@@ -46,7 +57,7 @@ function App() {
     const payload = {
       type: "text",
       nickname,
-      text: message,
+      message: message,
       timestamp: new Date().toISOString(),
     };
 
@@ -62,7 +73,7 @@ function App() {
 
   const renderMessage = (msgObj, i) => (
     <div key={i} className="message">
-      <strong>{msgObj.nickname}</strong> [{msgObj.timestamp}] : {msgObj.text}
+      <strong>{msgObj.nickname}</strong> [{msgObj.timestamp}] : {msgObj.message}
     </div>
   );
 

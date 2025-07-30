@@ -7,6 +7,7 @@ import uvicorn
 import json
 import base64
 from datetime import datetime, timedelta, timezone
+from pydantic import BaseModel
 
 app = FastAPI()
 
@@ -40,6 +41,15 @@ class ConnectionManager:
 
 manager = ConnectionManager()
 
+class Message(BaseModel):
+  nickname : str
+  message : str
+  timestamp : str
+
+@app.get("/messages", response_model=list[Message])
+def get_messages():
+  return messages_collection.find()
+
 @app.websocket("/ws/{nickname}")
 async def websocket_endpoint(websocket: WebSocket, nickname: str):
     await manager.connect(websocket, nickname)
@@ -58,8 +68,8 @@ async def websocket_endpoint(websocket: WebSocket, nickname: str):
 
             messages_collection.insert_one({
                 "nickname": data.get("nickname", nickname),
-                "message": data.get("text", ""),
-                "timestamp": timestamp
+                "message": data.get("message", ""),
+                "timestamp": timestamp.isoformat()
             })
             
             msg_type = data.get("type")
@@ -71,7 +81,7 @@ async def websocket_endpoint(websocket: WebSocket, nickname: str):
         manager.disconnect(nickname)
         await manager.broadcast({
             "nickname": "system",
-            "text": f"{nickname}님이 나갔습니다.",
+            "message": f"{nickname}님이 나갔습니다.",
             "timestamp": datetime.utcnow().isoformat()
         })
 
