@@ -1,4 +1,4 @@
 # gpt-api
 
-
-Day3 실습자료 : https://buly.kr/FLYcyeW
+Day2 Lecture Note : https://buly.kr/AwfgTij 
+Day3 Lecture Note : https://buly.kr/FLYcyeW
