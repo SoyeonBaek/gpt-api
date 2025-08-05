@@ -7,7 +7,7 @@ from datetime import datetime, timedelta
 
 SCOPES = ['https://www.googleapis.com/auth/calendar']
 
-client_secret_json = "client_secret_772705558537-i205a18oj8nmv46gn73ru848j24600so.apps.googleusercontent.com.json"
+client_secret_json = "client_secret_~~~~~~.com.json"
 
 def get_calendar_service():
     creds = None
