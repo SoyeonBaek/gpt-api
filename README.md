@@ -1,4 +1,4 @@
-# gpt-api
+# 생성형 AI 소프트웨어 개발자 특강 - GPT API 활용 SW 교육
 
 [Day1 Lecture Note](https://github.com/SoyeonBaek/gpt-api/blob/2424442d684f2e9ef74da535f0b68751a4de6e09/lecture_notes/day1.pdf) : Restful API와 웹소켓. React와 Fast API를 활용한 실시간 채팅 애플리케이션 구현
 
